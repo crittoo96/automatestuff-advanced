@@ -1,0 +1,9 @@
+# scraping.pyで使用するライブラリ
+requests
+beautifulsoup4
+
+# excel_graph.pyで使用するライブラリ
+openpyxl
+
+# add_logo.pyで使用するライブラリ
+Pillow

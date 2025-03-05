@@ -14,13 +14,13 @@ from bs4 import BeautifulSoup
 
 
 ## 直接CSVファイルのURLを指定する
-excel_link_url = 'https://github.com/oreilly-japan/automatestuff2-ja/raw/refs/heads/main/ch13/censuspopdata.xlsx'
+excel_link_url = "https://github.com/oreilly-japan/automatestuff2-ja/raw/refs/heads/main/ch13/censuspopdata.xlsx"
 
 response = requests.get(excel_link_url)
 response.raise_for_status()
 
-with open('dl_censuspopdata.xlsx', 'wb') as file:
+with open("dl_censuspopdata.xlsx", "wb") as file:
     for chunk in response.iter_content(100000):
         file.write(chunk)
 
-print('dl_censuspopdata.xlsxをダウンロードしました。')
+print("dl_censuspopdata.xlsxをダウンロードしました。")
