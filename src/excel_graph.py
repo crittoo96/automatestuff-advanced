@@ -74,12 +74,6 @@ chart.x_axis.title = "State"
 chart.y_axis.title = "Population"
 sheet.add_chart(chart, "E1")
 
-# 画像として別出力して保存する
-# ... ここにコードを追加してください
-
-# 今回は難しいので、自動化せずに、開発者が手作業でExcelファイルを開き、「右クリック > 図として保存」してグラフ画像を取得します。
-
-
 # Excelファイルを保存
 file_name = f'population-{datetime.now().strftime("%Y%m%d")}.xlsx'
 wb.save(file_name)

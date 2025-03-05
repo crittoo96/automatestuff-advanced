@@ -7,3 +7,5 @@ openpyxl
 
 # add_logo.pyで使用するライブラリ
 Pillow
+
+pywin32

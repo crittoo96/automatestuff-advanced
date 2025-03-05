@@ -40,9 +40,28 @@ $python scraping.py
 $python excel_graph.py
 
 # 3. Excelファイルから画像を取得する。
-*(未実装)
+$python export_excel_graph.py
 
 # 4. 画像にロゴを追加する
 $python add_logo.py
 ```
 
+## 実行例
+
+```
+PS C:\Users\critt\Tutorials\veriserve-python\src> python .\scraping.py
+dl_censuspopdata.xlsxをダウンロードしました。
+PS C:\Users\critt\Tutorials\veriserve-python\src> python .\excel_graph.py
+ワークブックを開いています...
+各州の人口を集計しています...
+新しいシートを作成しています...
+棒グラフを作成しています...
+population-20250305.xlsxを保存しました。
+PS C:\Users\critt\Tutorials\veriserve-python\src> python .\export_excel_graph.py
+Excelを使用してチャートを画像としてエクスポートしています...
+graph.pngとしてチャート画像をエクスポートしました。
+PS C:\Users\critt\Tutorials\veriserve-python\src> python .\add_logo.py          
+ロゴを追加中 graph.png...
+graph.pngにロゴを追加完了しました。
+出力先: withLogo/graph.png
+```
