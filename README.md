@@ -24,12 +24,16 @@ https://www.mhlw.go.jp/stf/covid-19/open-data.html
 
 ※今後の発展として紹介するのみとし、演習は実施しない（恐らくそこまで行ける人はいない）
 
-## 実行方法
+## 環境準備
 
 ```bash
 # requirements.txtに記載されたライブラリをインストール
 $pip install -r requirements.txt
+```
 
+## 実行方法
+
+```bash
 # srcディレクトリに移動
 $cd src
 
@@ -48,7 +52,7 @@ $python add_logo.py
 
 ## 実行例
 
-```
+```powershell
 PS C:\Users\critt\Tutorials\veriserve-python\src> python .\scraping.py
 dl_censuspopdata.xlsxをダウンロードしました。
 PS C:\Users\critt\Tutorials\veriserve-python\src> python .\excel_graph.py
@@ -65,3 +69,7 @@ PS C:\Users\critt\Tutorials\veriserve-python\src> python .\add_logo.py
 graph.pngにロゴを追加完了しました。
 出力先: withLogo/graph.png
 ```
+
+## 実行結果
+
+![graph-with-logo](src/withLogo/graph-with-logo.png)

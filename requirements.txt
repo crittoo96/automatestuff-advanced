@@ -1,11 +1,11 @@
 # scraping.pyで使用するライブラリ
-requests
-beautifulsoup4
+requests==2.32.3
 
 # excel_graph.pyで使用するライブラリ
-openpyxl
+openpyxl==3.1.5
 
 # add_logo.pyで使用するライブラリ
-Pillow
+Pillow==11.1.0
 
-pywin32
+# export_excel_graph.pyで使用するライブラリ
+pywin32==308
