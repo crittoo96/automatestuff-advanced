@@ -1,26 +1,23 @@
-### beautifulsoup4を利用して、
-### https://github.com/oreilly-japan/automatestuff2-ja/blob/main/ch16/example.csvをダウンロードして、
-### sample.csvとして保存するスクリプト
+"""
+インターネット上からデータを取得するスクリプト
+
+requestsを利用してExcelファイルをダウンロードする。
+ダウンロードしたExcelファイルをdl_censuspopdata.xlsxとして保存する。
+"""
 
 import requests
-from bs4 import BeautifulSoup
 
-# website_url = 'https://github.com/oreilly-japan/automatestuff2-ja/blob/main/ch16/'
-# response = requests.get(website_url)
-# response.raise_for_status()
-
-# soup = BeautifulSoup(response.text, 'html.parser')
-# excel_link = soup.select('a[href*="example.csv"]')[0]
-
-
-## 直接CSVファイルのURLを指定する
+# 直接ExcelファイルのURLを指定する
 excel_link_url = "https://github.com/oreilly-japan/automatestuff2-ja/raw/refs/heads/main/ch13/censuspopdata.xlsx"
 
+# requestsを利用してExcelファイルをダウンロードする
+# quickWeather.pyを参考にする。
 response = requests.get(excel_link_url)
 response.raise_for_status()
 
+# ファイルを保存する。
 with open("dl_censuspopdata.xlsx", "wb") as file:
-    for chunk in response.iter_content(100000):
-        file.write(chunk)
+    # ファイルの書き込み
+    file.write(response.content)
 
 print("dl_censuspopdata.xlsxをダウンロードしました。")

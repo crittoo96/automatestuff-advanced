@@ -1,6 +1,7 @@
 """
-予め用意したlogo.pngを、画像の右下に追加する
+画像の右下にロゴを追加するスクリプト
 
+予め用意したlogo.pngを、画像の右下に追加する。
 ch19/resizeAndAddLogo.pyを参考にして作成しました。
 """
 
@@ -8,8 +9,10 @@ import os
 
 from PIL import Image
 
+# ロゴ画像のファイル名を指定
 LOGO_FILENAME = "logo.png"
 
+# ロゴ画像を開く
 logo_img = Image.open(LOGO_FILENAME)
 logo_width, logo_height = logo_img.size
 
@@ -44,7 +47,7 @@ for filename in os.listdir("."):
         logo_img,
     )
 
-    # ロゴを付けた画像を別画像（-with-logo）として保存
+    # ロゴを付けた画像を別画像として保存
     no_extension_filename = os.path.splitext(filename)[0]
     img.save(os.path.join(SAVE_DIR, f"{no_extension_filename}-with-logo.png"))
 

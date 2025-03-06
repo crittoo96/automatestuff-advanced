@@ -1,4 +1,6 @@
 """
+エクセルファイルを読み込み、棒グラフを作成するスクリプト
+
 dl_censuspopdata.xlsxの内容
 
 CensusTract	State	County	POP2010

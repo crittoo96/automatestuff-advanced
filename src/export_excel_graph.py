@@ -1,3 +1,9 @@
+"""
+Excelファイルに追加したグラフを画像としてエクスポートするスクリプト
+
+『退屈な仕事をPythonにさせよう』のテキストに参考になるコードはありません。
+"""
+
 import os
 from datetime import datetime
 
@@ -9,12 +15,12 @@ except ImportError:
     )
 
 print("Excelを使用してチャートを画像としてエクスポートしています...")
+
 # Excelアプリケーションを起動
 excel = win32com.client.Dispatch("Excel.Application")
 excel.Visible = False  # Excelウィンドウを非表示
 
-# 絶対パスに変換
-
+# 画像が存在するExcelファイルを開く処理
 file_name = f'population-{datetime.now().strftime("%Y%m%d")}.xlsx'
 abs_file_name = os.path.abspath(file_name)
 wb_com = excel.Workbooks.Open(abs_file_name)
