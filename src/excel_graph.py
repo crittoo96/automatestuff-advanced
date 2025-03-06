@@ -45,24 +45,19 @@ population_data = {}
 # 2行目から最終行までを読み込む
 for row in range(2, sheet.max_row + 1):
     # B列（州名）とD列（人口）を読み込む
-    state = sheet[f"B{row}"].value
-    pop = sheet[f"D{row}"].value
-    population_data.setdefault(state, 0)
-    population_data[state] += pop
+    # ここに実装... readCensusExcel.pyを参考にする。
 
-# population_dataを人口の降順でソート
-population_data = dict(
-    sorted(population_data.items(), key=lambda x: x[1], reverse=True)
-)
+# オプション処理: population_dataを人口の降順でソート
+# ここに実装...
 
 # シートを作成 13.5.2
 print("新しいシートを作成しています...")
-new_sheet = wb.create_sheet(title="Population")
+new_sheet = # ここに実装...
 new_sheet["A1"] = "State"
 new_sheet["B1"] = "Population"
 
-# シートを切り替える
-wb.active = new_sheet
+# 操作中のExcelブックのシートを切り替える
+# ここに実装...
 
 # 集計結果を新しいシートに書き込む
 for i, (state, pop) in enumerate(population_data.items(), start=2):

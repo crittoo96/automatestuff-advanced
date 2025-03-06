@@ -72,4 +72,6 @@ graph.pngにロゴを追加完了しました。
 
 ## 実行結果
 
+州別の人口データをグラフ化した画像にロゴを追加した結果
+
 ![graph-with-logo](src/withLogo/graph-with-logo.png)
