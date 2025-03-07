@@ -32,71 +32,75 @@ from datetime import datetime
 import openpyxl
 from openpyxl.chart import BarChart, Reference
 
-# Excelファイルを読み込む
-print("ワークブックを開いています...")
-wb = openpyxl.load_workbook("dl_censuspopdata.xlsx")
-sheet = wb["Population by Census Tract"]
+
+def run():
+    # Excelファイルを読み込む
+    print("ワークブックを開いています...")
+    wb = openpyxl.load_workbook("dl_censuspopdata.xlsx")
+    sheet = wb["Population by Census Tract"]
+
+    # 各州の人口を集計
+    print("各州の人口を集計しています...")
+    population_data = {}
+
+    # 2行目から最終行までを読み込む
+    for row in range(2, sheet.max_row + 1):
+        # B列（州名）とD列（人口）を読み込む
+        state = sheet[f"B{row}"].value
+        pop = sheet[f"D{row}"].value
+        population_data.setdefault(state, 0)
+        population_data[state] += pop
+
+    # population_dataを人口の降順でソート
+    population_data = dict(
+        sorted(population_data.items(), key=lambda x: x[1], reverse=True)
+    )
+
+    # シートを作成 13.5.2
+    print("新しいシートを作成しています...")
+    new_sheet = wb.create_sheet(title="Population")
+    new_sheet["A1"] = "State"
+    new_sheet["B1"] = "Population"
+
+    # シートを切り替える
+    wb.active = new_sheet
+
+    # 集計結果を新しいシートに書き込む
+    for i, (state, pop) in enumerate(population_data.items(), start=2):
+        new_sheet[f"A{i}"] = state
+        new_sheet[f"B{i}"] = pop
+
+    # 棒グラフを作成
+    print("棒グラフを作成しています...")
+    print(len(population_data))
+
+    # 参照するデータの範囲を指定, p.398を参照。
+    # 以下のコードを理解してみましょう。
+    # 余裕があれば、別のグラフを作成してみましょう。
+    # https://openpyxl.readthedocs.io/en/stable/charts/bar.html
+    states = Reference(new_sheet, min_col=1, min_row=2, max_row=len(population_data))
+    populations = Reference(
+        new_sheet, min_col=2, min_row=1, max_col=2, max_row=len(population_data)
+    )
+    # 棒グラフにデータを設定
+    chart = BarChart()
+    chart.add_data(populations, titles_from_data=True)
+    chart.set_categories(states)
+
+    # グラフのタイトルと軸ラベルを設定
+    chart.title = "Population by State"
+    chart.x_axis.title = "State"
+    chart.y_axis.title = "Population"
+
+    # グラフをシートに追加
+    new_sheet.add_chart(chart, "E1")
+
+    # Excelファイルを保存
+    file_name = f'population-{datetime.now().strftime("%Y%m%d")}.xlsx'
+    wb.save(file_name)
+
+    print(f"{file_name}を保存しました。")
 
 
-# 各州の人口を集計
-print("各州の人口を集計しています...")
-population_data = {}
-
-# 2行目から最終行までを読み込む
-for row in range(2, sheet.max_row + 1):
-    # B列（州名）とD列（人口）を読み込む
-    state = sheet[f"B{row}"].value
-    pop = sheet[f"D{row}"].value
-    population_data.setdefault(state, 0)
-    population_data[state] += pop
-
-# population_dataを人口の降順でソート
-population_data = dict(
-    sorted(population_data.items(), key=lambda x: x[1], reverse=True)
-)
-
-# シートを作成 13.5.2
-print("新しいシートを作成しています...")
-new_sheet = wb.create_sheet(title="Population")
-new_sheet["A1"] = "State"
-new_sheet["B1"] = "Population"
-
-# シートを切り替える
-wb.active = new_sheet
-
-# 集計結果を新しいシートに書き込む
-for i, (state, pop) in enumerate(population_data.items(), start=2):
-    new_sheet[f"A{i}"] = state
-    new_sheet[f"B{i}"] = pop
-
-
-# 棒グラフを作成
-print("棒グラフを作成しています...")
-print(len(population_data))
-
-# 参照するデータの範囲を指定, p.398を参照。
-# 以下のコードを理解してみましょう。
-# 余裕があれば、別のグラフを作成してみましょう。
-# https://openpyxl.readthedocs.io/en/stable/charts/bar.html
-states = Reference(new_sheet, min_col=1, min_row=2, max_row=len(population_data))
-populations = Reference(
-    new_sheet, min_col=2, min_row=1, max_col=2, max_row=len(population_data)
-)
-# 棒グラフにデータを設定
-chart = BarChart()
-chart.add_data(populations, titles_from_data=True)
-chart.set_categories(states)
-
-# グラフのタイトルと軸ラベルを設定
-chart.title = "Population by State"
-chart.x_axis.title = "State"
-chart.y_axis.title = "Population"
-
-# グラフをシートに追加
-new_sheet.add_chart(chart, "E1")
-
-# Excelファイルを保存
-file_name = f'population-{datetime.now().strftime("%Y%m%d")}.xlsx'
-wb.save(file_name)
-
-print(f"{file_name}を保存しました。")
+if __name__ == "__main__":
+    run()
